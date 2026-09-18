@@ -1,0 +1,5 @@
+# Mankind First Foundation — robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.mankindfirstfoundation.org/sitemap.xml
