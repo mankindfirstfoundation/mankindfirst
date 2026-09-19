@@ -413,3 +413,20 @@ ul { padding-left: 1.2em; }
   .site-header, .site-footer, .btn, .nav-toggle { display: none !important; }
   body { color: #000; }
 }
+
+/* ---------- Donation details: copy buttons + QR ---------- */
+.copy-row { margin: 0 0 .3rem; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; }
+.copy-value { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-weight: 700; letter-spacing: .02em; word-break: break-all; }
+.copy-btn {
+  font: inherit; font-size: .8rem; font-weight: 800; cursor: pointer;
+  padding: .25rem .8rem; border-radius: 999px; border: 2px solid var(--blue-600);
+  background: #fff; color: var(--blue-600);
+}
+.copy-btn:hover { background: var(--blue-600); color: #fff; }
+.copy-btn.copied { background: var(--green-600); border-color: var(--green-600); color: #fff; }
+.qr-box { background: #fff; border-radius: var(--radius-md); padding: .8rem; max-width: 300px; margin: 0 auto; }
+.qr-box img { display: block; width: 100%; height: auto; }
+
+/* ---------- Icon sizing fixes (icons were rendering full-width) ---------- */
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+.tile h3 svg, .note h4 svg { width: 20px; height: 20px; flex: none; vertical-align: -3px; margin-right: .35rem; color: var(--blue-600); }
