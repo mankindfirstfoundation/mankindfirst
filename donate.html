@@ -100,20 +100,20 @@
 
         <h3 class="mt-2">2 · In Pakistan — bank transfer</h3>
         <div class="card" style="padding:1.2rem 1.4rem;box-shadow:none;background:var(--sky-050)">
-          <p style="margin:0 0 .3rem"><strong>Account title:</strong> Mankind First Foundation</p>
-          <p style="margin:0 0 .3rem"><strong>Bank:</strong> Meezan Bank · Bosan Road branch, Multan</p>
-          <p style="margin:0 0 .3rem"><strong>IBAN:</strong> PK36 MEZN 0001 2345 6789 0123</p>
-          <p style="margin:0" class="small muted">Send your receipt to <strong>donate@mankindfirst.org</strong> for an official receipt and tax-donation certificate.</p>
+          <p style="margin:0 0 .3rem"><strong>Account title:</strong> Tanzeel Akram</p>
+          <p style="margin:0 0 .3rem"><strong>Bank:</strong> Meezan Bank · Kharkhna Bazar branch, Vehari</p>
+          <p class="copy-row"><strong>Account no.:</strong> <span class="copy-value">78010110399044</span> <button type="button" class="copy-btn" data-copy="78010110399044" aria-label="Copy account number">Copy</button></p>
+          <p class="copy-row"><strong>IBAN:</strong> <span class="copy-value">PK49 MEZN 0078 0101 1039 9044</span> <button type="button" class="copy-btn" data-copy="PK49MEZN0078010110399044" aria-label="Copy IBAN">Copy</button></p>
+          <p style="margin:.4rem 0 0" class="small muted">Send your receipt to <strong>donate@mankindfirst.org</strong> for an official receipt and tax-donation certificate.</p>
         </div>
         <p class="small muted mt-1">Zakat-designated gifts are kept in a separate ledger and spent only on zakat-eligible recipients, verified by our committees.</p>
       </div>
       <div class="panel-side">
         <h3>Or scan to give</h3>
-        <div class="qr-slot">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1v1h-1zM17 17.5h1M14 20h1M17.5 20H21M20 17h1v1h-1z"/></svg>
-          <p><strong>QR code live soon.</strong> Our official GoFundMe QR code appears here once the Clean Water Phase II campaign launches — tested on multiple phones before publishing.</p>
+        <div class="qr-box">
+          <img src="assets/images/donate-qr.jpg" alt="Meezan Bank QR code for donations to Tanzeel Akram" width="260" height="260">
         </div>
-        <p class="token mt-2" style="display:inline-block">[GOFUNDME_QR_IMAGE]</p>
+        <p class="small" style="margin:.7rem 0 0;color:#C9DCEC;text-align:center">Scan with your banking app, or copy the IBAN on the left.</p>
         <div class="mt-2">
           <p style="font-size:.9rem;color:#C9DCEC;margin-bottom:.4rem"><strong>Where your money goes</strong> (2025, audited):</p>
           <div style="display:grid;gap:.5rem;font-size:.85rem">
@@ -214,5 +214,30 @@
   </div>
 </footer>
 <script src="js/main.js" defer></script>
+<script>
+(function () {
+  document.querySelectorAll(".copy-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      var done = function () {
+        var old = btn.textContent;
+        btn.textContent = "Copied ✓";
+        btn.classList.add("copied");
+        setTimeout(function () { btn.textContent = old; btn.classList.remove("copied"); }, 2000);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+      } else { fallback(text, done); }
+    });
+  });
+  function fallback(text, done) {
+    var t = document.createElement("textarea");
+    t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select();
+    try { document.execCommand("copy"); done(); } catch (e) {}
+    document.body.removeChild(t);
+  }
+})();
+</script>
 </body>
 </html>
