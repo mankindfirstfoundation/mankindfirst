@@ -22,13 +22,11 @@
     toggle.addEventListener("click", function () {
       var open = navWrap.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.textContent = open ? "Close" : "Menu";
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && navWrap.classList.contains("open")) {
         navWrap.classList.remove("open");
         toggle.setAttribute("aria-expanded", "false");
-        toggle.textContent = "Menu";
         toggle.focus();
       }
     });
@@ -49,6 +47,30 @@
   } else {
     revealEls.forEach(function (el) { el.classList.add("in"); });
   }
+
+  /* ----- Copy buttons (IBAN / account number) ----- */
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var label = btn.textContent;
+    var done = function () {
+      btn.textContent = "Copied \u2713";
+      btn.classList.add("copied");
+      setTimeout(function () { btn.textContent = label; btn.classList.remove("copied"); }, 2000);
+    };
+    var fallback = function (text) {
+      var t = document.createElement("textarea");
+      t.value = text; t.setAttribute("readonly", "");
+      t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+      document.body.removeChild(t);
+    };
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text); });
+      } else { fallback(text); }
+    });
+  });
 
   /* ----- Footer year ----- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
