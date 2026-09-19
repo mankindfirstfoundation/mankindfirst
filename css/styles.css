@@ -176,7 +176,16 @@ ul { padding-left: 1.2em; }
   font: 700 .95rem var(--font); color: var(--navy-900); padding: .5rem .95rem; cursor: pointer;
 }
 @media (max-width: 920px) {
-  .nav-toggle { display: inline-flex; align-items: center; gap: .5rem; }
+  /* three-line (hamburger) menu button, phones and tablets only */
+  .nav-toggle { display: inline-block; position: relative; width: 48px; height: 46px; padding: 0; font-size: 0; color: transparent; }
+  .nav-toggle::before, .nav-toggle::after {
+    content: ""; position: absolute; left: 11px; right: 11px; top: calc(50% - 10px); height: 3px; border-radius: 3px;
+    background: var(--navy-900); transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .nav-toggle::before { box-shadow: 0 9px 0 var(--navy-900), 0 18px 0 var(--navy-900); }
+  .nav-toggle::after { opacity: 0; }
+  .nav-toggle[aria-expanded="true"]::before { box-shadow: none; top: calc(50% - 1px); transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="true"]::after { opacity: 1; top: calc(50% - 1px); transform: rotate(-45deg); }
   .primary-nav { display: block; }
   .primary-nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0;
     background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-2);
